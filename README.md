@@ -1,2 +1,2 @@
-# SCRO
-Proximity marketing using smart cameras
+# facematch
+Face match in python using Facenet and their pretrained model
