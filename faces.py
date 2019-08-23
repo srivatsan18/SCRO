@@ -4,7 +4,6 @@ import pickle
 face_cascade=cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 recognizer=cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainner.yml")
-
 labels={"person_name":1}
 with open("labels.picke",'rb') as f:
 	og_labels=pickle.load(f)
@@ -19,12 +18,12 @@ while(True):
 	for(x,y,w,h) in faces:
 		roi_gray=gray[y:y+h,x:x+w]
 		roi_color=frame[y:y+h,x:x+w]
-		img_item = "face-img.png"
+        
+		img_item = "face-img.jpg"
 		cv2.imwrite(img_item,roi_gray)
-
 		#recognize?deep learned model 
 		id_, conf=recognizer.predict(roi_gray)
-		if conf>=45 and conf<=85:
+		if conf>=80 and conf<=95:
 			print(id_)
 			print(labels[id_])
 			font=cv2.FONT_HERSHEY_SIMPLEX
@@ -32,7 +31,7 @@ while(True):
 			color=(0,255,255)
 			stroke=2
 			cv2.putText(frame,name,(x,y),font,1,color,stroke,cv2.LINE_AA)
-
+            
 		color=(255,0,0)#BGR
 		stroke=2
 		cv2.rectangle(frame,(x,y),((x+w),(y+h)),color,stroke)

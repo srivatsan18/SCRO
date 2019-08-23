@@ -31,11 +31,11 @@ for root,dirs,files in os.walk(image_dir):
 			#x_train.append(path)
 			
 			pil_image=Image.open(path).convert("L")#grayscale
-			size=(550,550)
+			size=(300,300)
 			final_image=pil_image.resize(size,Image.ANTIALIAS)
 			image_array=np.array(pil_image,"uint8")
 			#print(image_array)
-			faces=face_cascade.detectMultiScale(image_array,scaleFactor=1.5,minNeighbors=5)
+			faces=face_cascade.detectMultiScale(image_array,scaleFactor=2,minNeighbors=1)
 
 			for(x,y,w,h)in faces:
 				roi=image_array[y:y+h,x:x+w]
